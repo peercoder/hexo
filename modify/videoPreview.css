@@ -1,4 +1,4 @@
-.video-preview {
+.videoPreview {
     display: inline-block;
     position: relative;
     overflow: hidden;
@@ -8,7 +8,7 @@
     height: 90px;
 }
 
-.video-preview img {
+.videoPreview img {
     width: initial;
     height: initial;
 	padding: 0;

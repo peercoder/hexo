@@ -1,5 +1,4 @@
-    window.onload = function () { //for edge work
-
+//<![CDATA[
 (function($) {
     $.fn.videoPreview = function(options) {
         return this.each(function() {
@@ -22,7 +21,7 @@
             var frames;
 
             elm.mousemove(function(e) {
-            img.load(function() { // we need to know video's full width
+            img.on('load', function() { // we need to know video's full width
                 columns = 4; //4x4 screenshots
                 horizontals = 4; //4x4 screenshots
                 $(this).show();
@@ -33,8 +32,20 @@
                 frames = columns * horizontals;
                 elm.css('width', width);
             });				
-                var left = e.clientX - elm.position().left; // position inside the wrapper (px unit)
-                slider.show().css('left', left - 1); // +4 because < 4, it's not smooth in chrome firefox
+				var elmOffsetLeft = elm.offset().left;
+				//var elmPositionLeft = elm.position().left;				
+				//var sliderOffsetLeft = slider.offset().left;
+				//var sliderPositionLeft = slider.position().left;								
+				//var offset = elmOffsetLeft - sliderOffsetLeft;				
+                //var left = e.clientX - elm.position().left - (elmOffsetLeft - elmPositionLeft); // position inside the wrapper (px unit)
+                var left = e.clientX - elmOffsetLeft; // position inside the wrapper (px unit)				
+				//console.log('elmOffsetLeft: '+elmOffsetLeft);
+				//console.log('elmPositionLeft: '+elmPositionLeft);	
+				//console.log('sliderOffsetLeft: '+sliderOffsetLeft);
+				//console.log('sliderPositionLeft: '+sliderPositionLeft);												
+				//console.log('offset: '+offset);				
+				//slider.css('margin-left', -(elmOffsetLeft - elmPositionLeft));
+                slider.show().css('left', left); // +4 because < 4, it's not smooth in chrome firefox
                 var cssleft = Math.floor((left / width) * (frames)) * width;
                 img.css('left', -cssleft);
                 img.css('top', 0); //horizontal 1st
@@ -52,7 +63,5 @@
         });
     };
 })(jQuery);
-
-$('.video-preview').videoPreview();
-
-}
+$('.videoPreview').videoPreview();
+//]]>
